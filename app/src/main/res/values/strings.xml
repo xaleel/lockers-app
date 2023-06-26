@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">lockers</string>
+    <string name="previous">Previous</string>
+    <string name="refresh">Refresh</string>
+    <string name="connections">Connections</string>
+    <string name="baud_rate">Baudrate:</string>
+    <string name="data_bits">Data bits:</string>
+    <string name="stop_bits">Stop bits:</string>
+    <string name="parity">Parity:</string>
+    <string name="apply">Apply</string>
+    <string name="status">Status</string>
+    <string name="open_1">Open 1</string>
+    <string name="ip">IP</string>
+    <string name="back">Back</string>
+</resources>
