@@ -53,31 +53,31 @@ class SerialUtil(private val port: UsbSerialPort, private val console: Console) 
                     Console.Message("Door index not in the array.", "#AA4040", 3)
                 )
             )
-            opened = false
-        }
-        val doorHex = doors[index].replace(" ", "")
-        try {
-            port.write(decodeHex(doorHex), State.timeout)
-        } catch (e: SerialTimeoutException) {
-            console.log(
-                listOf(
-                    Console.Message(
-                        "openDoor :: ", "#DEDEDE", 3
-                    ), Console.Message("Error: timeout during write.", "#AA4040", 0)
-                )
-            )
-            opened = false
-        } catch (e: IOException) {
-            console.log(
-                listOf(
-                    Console.Message(
-                        "openDoor :: ", "#DEDEDE", 3
-                    ), Console.Message(
-                        "Error: IOException thrown while writing.", "#AA4040", 0
+        } else {
+            val doorHex = doors[index].replace(" ", "")
+            try {
+                port.write(decodeHex(doorHex), State.timeout)
+            } catch (e: SerialTimeoutException) {
+                console.log(
+                    listOf(
+                        Console.Message(
+                            "openDoor :: ", "#DEDEDE", 3
+                        ), Console.Message("Error: timeout during write.", "#AA4040", 0)
                     )
                 )
-            )
-            opened = false
+                opened = false
+            } catch (e: IOException) {
+                console.log(
+                    listOf(
+                        Console.Message(
+                            "openDoor :: ", "#DEDEDE", 3
+                        ), Console.Message(
+                            "Error: IOException thrown while writing.", "#AA4040", 0
+                        )
+                    )
+                )
+                opened = false
+            }
         }
         State.lastOutput.add(opened)
     }

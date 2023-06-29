@@ -125,6 +125,8 @@ class MainFragment : Fragment() {
 
         val linearLayout = binding.connectionsContainer
         linearLayout.removeAllViews()
+
+        State.connections.forEach { connection -> connection.close() }
         State.connections = emptyList()
 
         availableDrivers.forEachIndexed { index, driver ->
@@ -152,6 +154,7 @@ class MainFragment : Fragment() {
                     true,
                     port
                 )
+                State.connectionHandler = SerialUtil(port, console)
             } catch (e: Exception) {
                 renderText(
                     contextSource, linearLayout, (index + 1).toString().plus(
@@ -297,6 +300,8 @@ class MainFragment : Fragment() {
         State.ip = ip
         APIClient.disconnected = 0
         displayParamsError("success")
+        val saved = FileUtil.saveState(contextSource)
+        displayParamsError("saved_$saved")
     }
 
     private fun displayParamsError(param: String) {
@@ -308,9 +313,11 @@ class MainFragment : Fragment() {
         messages["stopBitsInvalid"] = "Error: stop bits should be in [1, 2, 3]."
         messages["parityInvalid"] =
             "Error: stop bits should be in ['none', 'odd', 'even', 'mark', 'space']."
-        messages["success"] = "Successfully updated params"
+        messages["success"] = "Successfully updated params."
+        messages["saved_true"] = "Successfully saved default params."
+        messages["saved_false"] = "Failed to save default params."
 
-        val color = if (param == "success") "#4BB543" else "#DF4759"
+        val color = if (param == "success" || param == "saved_true") "#4BB543" else "#DF4759"
         console.log(listOf(Console.Message(messages[param] ?: "", color, 0)))
     }
 
