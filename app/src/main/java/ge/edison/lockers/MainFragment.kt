@@ -38,6 +38,8 @@ class MainFragment : Fragment() {
         override fun handleMessage(msg: Message) {
             if (msg.obj is List<*>) {
                 console.log(msg.obj as List<Console.Message>)
+            } else {
+                attemptApply()
             }
         }
     }

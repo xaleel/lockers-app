@@ -42,5 +42,5 @@ object State {
     val lastOutput: MutableList<Boolean> = mutableListOf()
     var timeout: Int = 500 // millisecond
     var toBeDisconnected: Boolean = false
-    var ip: String? = "192.168.43.242"
+    var ip: String? = "127.0.0.1"
 }

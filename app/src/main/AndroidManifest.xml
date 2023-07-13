@@ -16,18 +16,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Lockers"
-        >
+    >
 
-        <receiver android:enabled="true" android:name=".StartupOnBootUpReceiver"
+        <!-- <receiver android:enabled="true" android:name=".StartupOnBootUpReceiver"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </receiver>
+        </receiver> -->
 
-        <service android:name=".BackgroundService"/>
+        <service android:name=".BackgroundService" />
 
         <activity
             android:name=".MainActivity"

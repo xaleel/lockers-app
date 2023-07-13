@@ -15,6 +15,7 @@ class BackgroundService : Service() {
     var messenger: Messenger? = null
     private var apiHealth = "?"
     private var notificationManager: NotificationManager? = null
+    private var timeElapsed = 0
 
     private val incomingHandler = object : Handler(Looper.getMainLooper()) {
         override fun handleMessage(msg: Message) {
@@ -53,6 +54,13 @@ class BackgroundService : Service() {
                 }
                 synchronized(APIClient) {
                     logAPIHealth()
+                }
+            } else {
+                if (timeElapsed > 5000) {
+                    timeElapsed = 0
+                    message.obj = 0 // attemptApply()
+                } else {
+                    timeElapsed += 500
                 }
             }
             messenger?.send(message)

@@ -18,20 +18,6 @@ object APIClient {
     @OptIn(DelicateCoroutinesApi::class)
     fun pushStatus(statusAsJson: String, console: Console?) {
         if (disconnected == 2) {
-            console?.log(
-                listOf(
-                    Console.Message(
-                        "HTTPUtil::pushStatus:",
-                        "#DF4759",
-                        3
-                    ),
-                    Console.Message(
-                        "API health 0%, Disconnected. Check the API and click 'APPLY'",
-                        "#DEDEDE",
-                        0
-                    )
-                )
-            )
             return
         }
         var result: String? = null
